@@ -1,0 +1,53 @@
+{
+  "name": "Kashyflo - Smart Budget Splitting",
+  "short_name": "Kashyflo",
+  "description": "Offline-first budgeting app for Nigerian salary earners. Track expenses, split income smartly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/kashyflo-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/kashyflo-logo.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["finance", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Add Expense",
+      "short_name": "Add Expense",
+      "description": "Quickly add a new expense",
+      "url": "/add-expense",
+      "icons": [
+        {
+          "src": "/kashyflo-logo.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "short_name": "Settings",
+      "description": "Manage your salary and budget allocation",
+      "url": "/settings",
+      "icons": [
+        {
+          "src": "/kashyflo-logo.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
