@@ -1,3 +1,5 @@
+'use client'
+
 import AddExpense from '@/components/add-expense'
 
 export default function AddExpensePage() {
