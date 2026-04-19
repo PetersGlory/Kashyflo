@@ -4,9 +4,11 @@ import { useEffect } from 'react'
 import { useKashyflo } from '@/lib/store'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Plus, Settings, TrendingUp, History } from 'lucide-react'
+import { Plus, Settings, TrendingUp, History, BarChart3 } from 'lucide-react'
 import Link from 'next/link'
 import { formatCurrency } from '@/lib/utils'
+import { Alerts } from './alerts'
+import { WeeklySummary } from './weekly-summary'
 
 export default function Dashboard() {
   const {
@@ -67,6 +69,11 @@ export default function Dashboard() {
             <h1 className="text-2xl font-bold text-foreground">Kashyflo</h1>
           </div>
           <div className="flex items-center gap-2">
+            <Link href="/analytics">
+              <Button variant="ghost" size="icon">
+                <BarChart3 className="w-5 h-5" />
+              </Button>
+            </Link>
             <Link href="/transactions">
               <Button variant="ghost" size="icon">
                 <History className="w-5 h-5" />
@@ -83,16 +90,28 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-6">
+        {/* Alerts */}
+        <div className="mb-6">
+          <Alerts />
+        </div>
+
         {/* Total Salary Card */}
         {totalSalary > 0 && (
-          <Card className="mb-6 bg-gradient-to-br from-primary to-secondary text-white p-6">
-            <p className="text-sm font-medium opacity-90 mb-2">Monthly Budget</p>
-            <h2 className="text-4xl font-bold mb-4">{formatCurrency(totalSalary)}</h2>
-            <div className="flex items-center justify-between text-sm">
-              <span className="opacity-90">{daysUntilSalary} days until next salary</span>
-              <TrendingUp className="w-4 h-4" />
+          <>
+            <Card className="mb-6 bg-gradient-to-br from-primary to-secondary text-white p-6">
+              <p className="text-sm font-medium opacity-90 mb-2">Monthly Budget</p>
+              <h2 className="text-4xl font-bold mb-4">{formatCurrency(totalSalary)}</h2>
+              <div className="flex items-center justify-between text-sm">
+                <span className="opacity-90">{daysUntilSalary} days until next salary</span>
+                <TrendingUp className="w-4 h-4" />
+              </div>
+            </Card>
+
+            {/* Weekly Summary */}
+            <div className="mb-6">
+              <WeeklySummary />
             </div>
-          </Card>
+          </>
         )}
 
         {/* Category Cards */}
