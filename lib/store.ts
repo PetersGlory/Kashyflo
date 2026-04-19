@@ -1,7 +1,7 @@
 'use client'
 
 import { create } from 'zustand'
-import { db, Expense, SalaryEntry, BudgetAllocation } from './db'
+import { db, Expense, SalaryEntry, BudgetAllocation, Category } from './db'
 
 export const DEFAULT_ALLOCATIONS: BudgetAllocation[] = [
   { category: 'Rent', percentage: 20 },
@@ -19,6 +19,7 @@ interface KashyfloStore {
   expenses: Expense[]
   salaries: SalaryEntry[]
   allocations: BudgetAllocation[]
+  categories: Category[]
 
   // Computed
   totalSalary: number
@@ -47,6 +48,7 @@ export const useKashyflo = create<KashyfloStore>((set, get) => ({
   expenses: [],
   salaries: [],
   allocations: DEFAULT_ALLOCATIONS,
+  categories: [],
 
   // Computed values
   get totalSalary() {
@@ -136,6 +138,7 @@ export const useKashyflo = create<KashyfloStore>((set, get) => ({
     try {
       const expenses = await db.expenses.toArray()
       const salaries = await db.salaries.toArray()
+      const categories = await db.categories.toArray()
 
       // Filter by current month
       const monthStart = getMonthStart(Date.now())
@@ -147,6 +150,7 @@ export const useKashyflo = create<KashyfloStore>((set, get) => ({
       set({
         expenses: currentExpenses,
         salaries: currentSalaries,
+        categories: categories.sort((a, b) => a.order - b.order),
         currentMonth: monthStart,
       })
     } catch (error) {

@@ -9,10 +9,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import { CategorySelector } from './category-selector'
 
 export default function AddExpense() {
   const router = useRouter()
-  const { addExpense, allocations } = useKashyflo()
+  const { addExpense } = useKashyflo()
   const [category, setCategory] = useState('')
   const [amount, setAmount] = useState('')
   const [description, setDescription] = useState('')
@@ -54,22 +55,7 @@ export default function AddExpense() {
             {/* Category Selection */}
             <div>
               <Label className="text-sm font-medium mb-3 block">Category</Label>
-              <div className="grid grid-cols-2 gap-3">
-                {allocations.map((alloc) => (
-                  <button
-                    key={alloc.category}
-                    type="button"
-                    onClick={() => setCategory(alloc.category)}
-                    className={`p-3 rounded-lg border-2 transition-all ${
-                      category === alloc.category
-                        ? 'border-primary bg-primary/10 text-primary font-semibold'
-                        : 'border-border bg-background hover:border-primary/50'
-                    }`}
-                  >
-                    {alloc.category}
-                  </button>
-                ))}
-              </div>
+              <CategorySelector selected={category} onSelect={setCategory} />
             </div>
 
             {/* Amount Input */}
